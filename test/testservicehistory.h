@@ -2,12 +2,12 @@
 #define TESTSERVICEHISTORY_H
 
 #include <QObject>
-#include "src/servicehistory.h"
+#include "fakeservicehistory.h"
 class TestServiceHistory : public QObject
 {
     Q_OBJECT
 private:
-    ServiceHistory* service;
+    FakeServiceHistory* service;
 private slots:
     void init();
     void readAll();

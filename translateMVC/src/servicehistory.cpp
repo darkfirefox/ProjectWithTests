@@ -28,7 +28,6 @@ bool ServiceHistory::insertRow(QString langFrom,QString langTo,QString textFrom,
 ListElementhistory ServiceHistory::readAll()
 {
     ListRecords recs = db.readAll();
-    qDebug()<<"readed all";
     ListElementhistory list;
     for(int i=0;i<recs.size();i++){
         list.add(parser.fromRecord(recs.getAt(i)));

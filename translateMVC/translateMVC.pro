@@ -18,10 +18,8 @@ SOURCES += src/translateMVC.cpp \
     src/historymodel.cpp \
     src/servicehistory.cpp \
     src/database.cpp \
-    src/listelementhistory.cpp \
     src/databaseparser.cpp \
     src/listrecords.cpp \
-    src/elementhistory.cpp \
     src/servicehttp.cpp \
     src/networkmanager.cpp \
     src/requestconverter.cpp \
@@ -32,10 +30,6 @@ SOURCES += src/translateMVC.cpp \
 DISTFILES += qml/translateMVC.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
-    rpm/translateMVC.changes.in \
-    rpm/translateMVC.changes.run.in \
-    rpm/translateMVC.spec \
-    rpm/translateMVC.yaml \
     translations/*.ts \
     translateMVC.desktop \
     qml/pages/HistoryPage.qml
@@ -56,17 +50,14 @@ HEADERS += \
     src/historymodel.h \
     src/servicehistory.h \
     src/database.h \
-    src/listelementhistory.h \
     src/databaseparser.h \
     src/listrecords.h \
-    src/elementhistory.h \
     src/servicehttp.h \
     src/networkmanager.h \
     src/requestconverter.h \
     src/translatemodel.h \
     src/streamdata.h \
     src/iservicehtttp.h \
-    src/iservicehistory.h \
     src/services.h
 QT+=sql
 

@@ -1,4 +1,3 @@
-QT += testlib
 #QT -= gui
 
 #CONFIG += qt console warn_on depend_includepath testcase
@@ -6,14 +5,25 @@ QT += testlib
 
 #TEMPLATE = app
 
-TARGET = SailfishProjectTest
+TARGET = tst-translateMVC-sailfish
 CONFIG+=sailfishapp c++11 qt
 
 SOURCES +=  \
     main.cpp \
-    testservicehistory.cpp
+    testservicehistory.cpp \
+    fakeservicehistory.cpp
 INCLUDEPATH +=../translateMVC/
 include(../translateMVC/translateMVC.pri)
 
 HEADERS += \
-    testservicehistory.h
+    testservicehistory.h \
+    fakeservicehistory.h
+QT += testlib sql
+TARGETPATH = /usr/bin
+target.path = $$TARGETPATH
+
+DEPLOYMENT_PATH = /usr/share/$$TARGET
+qml.path = $$DEPLOYMENT_PATH
+
+extra.path = $$DEPLOYMENT_PATH
+extra.files = runTestsOnDevice.sh

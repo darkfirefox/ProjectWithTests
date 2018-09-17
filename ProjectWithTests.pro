@@ -1,6 +1,6 @@
 TEMPLATE = subdirs
 
-SUBDIRS += \
-    test\
-    translateMVC\
-    rpm
+SUBDIRS =translateMVC test
+
+OTHER_FILES += $$files(rpm/*)
+CONFIG+=ordered

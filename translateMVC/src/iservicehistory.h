@@ -1,5 +1,6 @@
 #ifndef ISERVICEHISTORY_H
 #define ISERVICEHISTORY_H
+#include <QString>
 class ListElementhistory;
 class IServiceHistory{
 public:
