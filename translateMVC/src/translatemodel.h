@@ -52,7 +52,7 @@ signals:
     void pageChanged();
 public slots:
 private slots:
-    void getResponse(QString response);
+    void getResponse();
 private:
     QString langFrom;
     QString langTo;

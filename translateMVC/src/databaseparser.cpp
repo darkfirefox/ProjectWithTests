@@ -32,6 +32,16 @@ ElementHistory DatabaseParser::fromStringList(QStringList list)
     return element;
 }
 
+ElementHistory DatabaseParser::fromData(InputData inputdata, Answer answer)
+{
+    ElementHistory element;
+    element.setLangF(inputdata.getLangFrom());
+    element.setLangT(inputdata.getLangTo());
+    element.setTextF(inputdata.getTextFrom());
+    element.setTextT(answer.getAnswer());
+    return element;
+}
+
 ListElementhistory DatabaseParser::fromListRecords(ListRecords recs)
 {
     ListElementhistory list;

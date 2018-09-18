@@ -11,55 +11,31 @@ StreamData &StreamData::Instance()
     return *stream;
 }
 
-void StreamData::writeString(QString str)
+InputData StreamData::getInputData()
 {
-    mutex.lock();
-    stack<<str;
-    mutex.unlock();
+    return inputData;
 }
 
-QStringList StreamData::readAll()
+Answer StreamData::getAnswer()
 {
-    mutex.lock();
-    QStringList all(stack);
-    stack.clear();
-    mutex.unlock();
-    return all;
+    return answer;
 }
 
-void StreamData::clear()
+void StreamData::writeInputData(InputData _input)
 {
-    mutex.lock();
-    stack.clear();
-    mutex.unlock();
+    inputData=_input;
+    emit inputDataIs();
 }
 
-StreamData &StreamData::operator <<(QString &s)
+void StreamData::writeAnswer(Answer _answer)
 {
-    mutex.lock();
-    addElement(s);
-    mutex.unlock();
-    return *this;
-}
-
-void StreamData::lastWasTrasnalate()
-{
-    mutex.lock();
-    QString translate=QString(stack.last());
-    mutex.unlock();
-    emit responseReceived(translate);
-}
-
-void StreamData::addElement(QString el)
-{
-   stack.push_back(el);
+    answer=_answer;
+    emit answerIs();
 }
 
 StreamData::StreamData(QObject *parent) : QObject(parent)
 {
-    mutex.lock();
-    stack.reserve(4);
-    mutex.unlock();
+
 }
 
 StreamDataDestroyer::~StreamDataDestroyer()

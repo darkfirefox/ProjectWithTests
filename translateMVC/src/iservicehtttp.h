@@ -1,6 +1,5 @@
 #ifndef ISERVICEHTTTP_H
 #define ISERVICEHTTTP_H
-#include <QString>
 class IServiceHttp
 {
 public:

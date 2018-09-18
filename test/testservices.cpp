@@ -2,23 +2,25 @@
 
 void TestServices::init()
 {
-    services=&ServicesT::Instance();
+    services=&Services::Instance();
+    services->setService(new FakeServiceHistory);
+    services->setService(new FakeServiceHTTP);
     stream=&StreamData::Instance();
 }
 
 void TestServices::translate()
 {
-    QSignalSpy spy(services,SIGNAL(addedAnswer()));
+    QSignalSpy spy(services,SIGNAL(writeInputData(InputData)));
     services->transalate("en","ru","hi");
-    QStringList streamList=stream->readAll();
-    QCOMPARE(streamList.size(),4);
+    Answer answer=stream->getAnswer();
+    QCOMPARE(answer.getAnswer().size(),0);
     QCOMPARE(spy.count(),1);
 }
 
 void TestServices::deleteRow()
 {
     QCOMPARE(services->deleteRow(-5),false);
-    (services->deleteRow(1),true);
+    QCOMPARE(services->deleteRow(1),true);
 }
 
 void TestServices::deleteAll()

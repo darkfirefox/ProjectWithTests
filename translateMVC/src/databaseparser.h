@@ -2,9 +2,11 @@
 #define DATABASEPARSER_H
 #include <QSqlRecord>
 #include <QVariant>
-#include "elementhistory.h"
-#include "listelementhistory.h"
-#include "listrecords.h"
+#include "src/elementhistory.h"
+#include "src/listelementhistory.h"
+#include "src/listrecords.h"
+#include "answer.h"
+#include "inputdata.h"
 class DatabaseParser
 {
 public:
@@ -12,6 +14,7 @@ public:
     ElementHistory fromRecord(const QSqlRecord &rec);
     ElementHistory fromStrings(QString langFrom,QString langTo,QString textFrom,QString textTo);
     ElementHistory fromStringList(QStringList list);
+    ElementHistory fromData(InputData inputdata,Answer answer);
     ListElementhistory fromListRecords(ListRecords recs);
 
 private:

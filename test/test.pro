@@ -12,8 +12,7 @@ SOURCES +=  \
     main.cpp \
     fakeservicehistory.cpp \
     fakeservicehttp.cpp \
-    testservices.cpp \
-    servicesT.cpp
+    testservices.cpp
 INCLUDEPATH +=../translateMVC/
 include(../translateMVC/translateMVC.pri)
 
@@ -21,8 +20,7 @@ HEADERS += \
     fakeservicehistory.h \
     fakeservicehttp.h \
     testservices.h \
-    testservices.h \
-    servicesT.h
+    testservices.h
 QT += testlib sql network
 TARGETPATH = /usr/bin
 target.path = $$TARGETPATH

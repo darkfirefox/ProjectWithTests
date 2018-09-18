@@ -4,7 +4,9 @@ TranslateModel::TranslateModel(QObject *parent) : QObject(parent)
 {
     stream=&StreamData::Instance();
     services=&Services::Instance();
-    connect(stream,SIGNAL(responseReceived(QString)),this,SLOT(getResponse(QString)));
+    services->setService(new ServiceHistory());
+    services->setService(new ServiceHTTP());
+    connect(stream,SIGNAL(answerIs()),this,SLOT(getResponse()));
     sourceText="Hello,World!";
     langFrom="en";
     langTo="ru";
@@ -87,9 +89,8 @@ void TranslateModel::historyPage()
     emit pageChanged();
 }
 
-void TranslateModel::getResponse(QString response)
+void TranslateModel::getResponse()
 {
-    if(response.isEmpty()) return;
-    translatedText=response;
+    translatedText=stream->getAnswer().getAnswer();
     emit translatedTextChanged();
 }

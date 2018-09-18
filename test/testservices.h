@@ -3,14 +3,16 @@
 
 #include <QObject>
 #include <QTest>
-#include "servicesT.h"
+#include "src/services.h"
 #include <QSignalSpy>
+#include "fakeservicehistory.h"
+#include "fakeservicehttp.h"
 
 class TestServices : public QObject
 {
     Q_OBJECT
 private:
-    ServicesT* services;
+    Services* services;
     StreamData* stream;
 private slots:
     void init();

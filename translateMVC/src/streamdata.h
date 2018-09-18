@@ -2,7 +2,9 @@
 #define STREAMDATA_H
 
 #include <QObject>
-#include <QMutex>
+#include "inputdata.h"
+#include "answer.h"
+
 class StreamData;
 class StreamDataDestroyer
 {
@@ -18,18 +20,17 @@ class StreamData : public QObject
 public:
     static StreamData &Instance();
 
-    void writeString(QString str);
-    QStringList readAll();
-    void clear();
-    StreamData &operator <<(QString& s);
+    InputData getInputData();
+    Answer getAnswer();
 signals:
-    void responseReceived(QString data);
+    void inputDataIs();
+    void answerIs();
 public slots:
-    void lastWasTrasnalate();
+    void writeInputData(InputData _input);
+    void writeAnswer(Answer _answer);
 private:
-    void addElement(QString el);
-    QStringList stack;
-    QMutex mutex;
+    InputData inputData;
+    Answer answer;
 
     static StreamData* stream;
     static StreamDataDestroyer destroyer;

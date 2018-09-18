@@ -7,6 +7,7 @@
 #include "streamdata.h"
 #include "databaseparser.h"
 #include "requestconverter.h"
+#include "convertor.h"
 class Services;
 class ServicesDestroyer
 {
@@ -24,11 +25,15 @@ public:
     static Services& Instance();
 
     void transalate(QString langFrom,QString langTo,QString sourceText);
-    void deleteAll();
-    void deleteRow(int id);
+    bool deleteAll();
+    bool deleteRow(int id);
     ListElementhistory readAll();
+
+    void setService(IServiceHistory* service);
+    void setService(IServiceHttp* service);
 signals:
-    void addedAnswer();
+    void writeInputData(InputData inputData);
+    void writeAnswer(Answer answer);
 public slots:
 private slots:
     void receivedTranslatedText(QNetworkReply* reply);
@@ -39,11 +44,12 @@ private:
 
     RequestConverter converter;
     DatabaseParser parser;
+    Convertor conv;
 
     static Services* services;
     static ServicesDestroyer destroyer;
 protected:
-    explicit Services(QObject *parent = nullptr);
+    explicit Services();
     friend class ServicesDestroyer;
     Services(const Services&);
     Services& operator =(Services&);

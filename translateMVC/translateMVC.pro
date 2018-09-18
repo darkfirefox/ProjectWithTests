@@ -14,11 +14,11 @@ TARGET = translateMVC
 
 CONFIG += sailfishapp
 
-SOURCES+= src/services.cpp\
+SOURCES+= \
  src/translateMVC.cpp \
     src/historymodel.cpp \
     src/translatemodel.cpp
-HEADERS+= src/services.h \
+HEADERS+= \
     src/historymodel.h \
     src/translatemodel.h
 

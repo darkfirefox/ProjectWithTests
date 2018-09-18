@@ -9,7 +9,11 @@ HEADERS += \
     $$PWD/src/streamdata.h \
     $$PWD/src/iservicehtttp.h \
     $$PWD/src/elementhistory.h\
-    $$PWD/src/listelementhistory.h
+    $$PWD/src/listelementhistory.h\
+$$PWD/src/convertor.h\
+$$PWD/src/inputdata.h\
+$$PWD/src/answer.h\
+$$PWD/src/services.h
 
 SOURCES +=\
     $$PWD/src/servicehistory.cpp \
@@ -21,4 +25,9 @@ SOURCES +=\
     $$PWD/src/requestconverter.cpp \
     $$PWD/src/streamdata.cpp \
     $$PWD/src/elementhistory.cpp\
-    $$PWD/src/listelementhistory.cpp
+    $$PWD/src/listelementhistory.cpp\
+$$PWD/src/convertor.cpp\
+$$PWD/src/inputdata.cpp\
+$$PWD/src/answer.cpp\
+$$PWD/src/services.cpp
+

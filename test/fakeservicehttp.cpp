@@ -7,6 +7,6 @@ FakeServiceHTTP::FakeServiceHTTP()
 
 void FakeServiceHTTP::sendRequest(QString url)
 {
-    QObject *ob;
-    emit receiveAnswer(ob);
+    QNetworkAccessManager* nam=new QNetworkAccessManager();
+    emit receiveAnswer(nam->get(QNetworkRequest(QUrl(url))));
 }
