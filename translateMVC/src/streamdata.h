@@ -24,7 +24,6 @@ public:
     StreamData &operator <<(QString& s);
 signals:
     void responseReceived(QString data);
-    void readyToStore();
 public slots:
     void lastWasTrasnalate();
 private:

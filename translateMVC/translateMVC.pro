@@ -14,18 +14,13 @@ TARGET = translateMVC
 
 CONFIG += sailfishapp
 
-SOURCES += src/translateMVC.cpp \
+SOURCES+= src/services.cpp\
+ src/translateMVC.cpp \
     src/historymodel.cpp \
-    src/servicehistory.cpp \
-    src/database.cpp \
-    src/databaseparser.cpp \
-    src/listrecords.cpp \
-    src/servicehttp.cpp \
-    src/networkmanager.cpp \
-    src/requestconverter.cpp \
-    src/translatemodel.cpp \
-    src/streamdata.cpp \
-    src/services.cpp
+    src/translatemodel.cpp
+HEADERS+= src/services.h \
+    src/historymodel.h \
+    src/translatemodel.h
 
 DISTFILES += qml/translateMVC.qml \
     qml/cover/CoverPage.qml \
@@ -46,19 +41,7 @@ CONFIG += sailfishapp_i18n
 # modify the localized app name in the the .desktop file.
 TRANSLATIONS += translations/translateMVC-de.ts
 
-HEADERS += \
-    src/historymodel.h \
-    src/servicehistory.h \
-    src/database.h \
-    src/databaseparser.h \
-    src/listrecords.h \
-    src/servicehttp.h \
-    src/networkmanager.h \
-    src/requestconverter.h \
-    src/translatemodel.h \
-    src/streamdata.h \
-    src/iservicehtttp.h \
-    src/services.h
+
 QT+=sql
 
 include(translateMVC.pri)

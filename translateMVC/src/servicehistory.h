@@ -4,45 +4,19 @@
 #include "elementhistory.h"
 #include "listelementhistory.h"
 #include "listrecords.h"
-#include "databaseparser.h"
 #include "iservicehistory.h"
-#include "streamdata.h"
-class ServiceHistory;
-class StreamData;
-class ServiceHistoryDestroyer
-{
-public:
-    ~ServiceHistoryDestroyer();
-    void init(ServiceHistory* service);
-private:
-    ServiceHistory* instance;
-};
 
 class ServiceHistory:public QObject,public IServiceHistory
 {
     Q_OBJECT
 public:
+    explicit ServiceHistory(QObject *parent = nullptr);
     bool deleteAll();
     bool deleteRow(int id);
-    bool insertRow(QString langFrom,QString langTo,QString textFrom,QString textTo);
-    ListElementhistory readAll();
-
-    static ServiceHistory& Instance();
-public slots:
-    void storeDataFromStream();
+    bool insertRow(ElementHistory element);
+    ListRecords readAll();
 private:
     Database db;
-    DatabaseParser parser;
-    StreamData* stream;
-
-    static ServiceHistory* service;
-    static ServiceHistoryDestroyer destroyer;
-protected:
-    explicit ServiceHistory(QObject *parent = nullptr);
-    friend class ServiceHistoryDestroyer;
-    ServiceHistory(const ServiceHistory&);
-    ServiceHistory& operator= (ServiceHistory&);
-    ~ServiceHistory(){}
 };
 
 #endif // SERVICEHISTORY_H

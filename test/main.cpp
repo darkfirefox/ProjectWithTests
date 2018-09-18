@@ -1,4 +1,4 @@
 #include <QtTest>
-#include <testservicehistory.h>
+#include <testservices.h>
 
-QTEST_GUILESS_MAIN(TestServiceHistory)
+QTEST_GUILESS_MAIN(TestServices)

@@ -16,24 +16,19 @@ bool FakeServiceHistory::deleteRow(int id)
     return true;
 }
 
-bool FakeServiceHistory::insertRow(QString langFrom, QString langTo, QString textFrom, QString textTo)
+ListRecords FakeServiceHistory::readAll()
 {
-    if(langFrom.size()!=2) return false;
-    if(langTo.size()!=2) return false;
-    if(textFrom.isNull()) return false;
-    if(textTo.isNull()) return false;
-    return true;
+    QSqlRecord rec;
+    ListRecords lr;
+    lr.add(rec);
+    return lr;
 }
 
-ListElementhistory FakeServiceHistory::readAll()
+bool FakeServiceHistory::insertRow(ElementHistory el)
 {
-    ListElementhistory list;
-    ElementHistory el;
-    el.setId(0);
-    el.setLangF("en");
-    el.setLangT("ru");
-    el.setTextF("1");
-    el.setTextT("Один");
-    list.add(el);
-    return list;
+    if(el.getLangF().size()!=2) return false;
+    if(el.getLangT().size()!=2) return false;
+    if(el.getTextF().isNull()) return false;
+    if(el.getTextT().isNull()) return false;
+    return true;
 }

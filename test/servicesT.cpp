@@ -1,48 +1,48 @@
-#include "services.h"
-Services* Services::services=0;
-ServicesDestroyer Services::destroyer;
+#include "servicesT.h"
+ServicesT* ServicesT::services=0;
+ServicesTDestroyer ServicesT::destroyer;
 
-Services::Services(QObject *parent) : QObject(parent)
+ServicesT::ServicesT(QObject *parent) : QObject(parent)
 {
-    serviceHistory=new ServiceHistory();
-    serviceHttp=new ServiceHTTP();
+    serviceHistory=new FakeServiceHistory();
+    serviceHttp=new FakeServiceHTTP();
     streamData=&StreamData::Instance();
     connect(this,SIGNAL(addedAnswer()),streamData,SLOT(lastWasTrasnalate()));
     connect(dynamic_cast<QObject*>(serviceHttp),SIGNAL(receiveAnswer(QNetworkReply*)),this,SLOT(receivedTranslatedText(QNetworkReply*)));
 }
 
-Services &Services::Instance()
+ServicesT &ServicesT::Instance()
 {
     if(!services){
-        services=new Services();
+        services=new ServicesT();
         destroyer.init(services);
     }
     return *services;
 }
 
-void Services::transalate(QString langFrom, QString langTo, QString sourceText)
+void ServicesT::transalate(QString langFrom, QString langTo, QString sourceText)
 {
     serviceHttp->sendRequest(converter.toString(langFrom,langTo,sourceText));
     *streamData<<langFrom<<langTo<<sourceText;
 }
 
-void Services::deleteAll()
+bool ServicesT::deleteAll()
 {
-    serviceHistory->deleteAll();
+    return serviceHistory->deleteAll();
 }
 
-void Services::deleteRow(int id)
+bool ServicesT::deleteRow(int id)
 {
-    serviceHistory->deleteRow(id);
+    return serviceHistory->deleteRow(id);
 }
 
-ListElementhistory Services::readAll()
+ListElementhistory ServicesT::readAll()
 {
     ListElementhistory leh=parser.fromListRecords(serviceHistory->readAll());
     return leh;
 }
 
-void Services::receivedTranslatedText(QNetworkReply *reply)
+void ServicesT::receivedTranslatedText(QNetworkReply *reply)
 {
     QString response=converter.translatedFromReply(reply);
     if(response.isEmpty()) streamData->clear();
@@ -53,12 +53,12 @@ void Services::receivedTranslatedText(QNetworkReply *reply)
     }
 }
 
-ServicesDestroyer::~ServicesDestroyer()
+ServicesTDestroyer::~ServicesTDestroyer()
 {
     delete instance;
 }
 
-void ServicesDestroyer::init(Services *services)
+void ServicesTDestroyer::init(ServicesT *services)
 {
     instance=services;
 }

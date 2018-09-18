@@ -8,13 +8,7 @@ DatabaseParser::DatabaseParser()
 
 ElementHistory DatabaseParser::fromRecord(const QSqlRecord &rec)
 {
-    ElementHistory element;
-    element.setId(rec.value(0).toInt());
-    element.setLangF(rec.value(1).toString());
-    element.setLangT(rec.value(2).toString());
-    element.setTextF(rec.value(3).toString());
-    element.setTextT(rec.value(4).toString());
-    return element;
+    return toElement(rec);
 }
 
 ElementHistory DatabaseParser::fromStrings(QString langFrom, QString langTo, QString textFrom, QString textTo)
@@ -35,6 +29,26 @@ ElementHistory DatabaseParser::fromStringList(QStringList list)
     element.setLangT(list.at(1));
     element.setTextF(list.at(2));
     element.setTextT(list.at(3));
+    return element;
+}
+
+ListElementhistory DatabaseParser::fromListRecords(ListRecords recs)
+{
+    ListElementhistory list;
+    for(int i=0;i<recs.size();i++){
+        list.add(toElement(recs.getAt(i)));
+    }
+    return list;
+}
+
+ElementHistory DatabaseParser::toElement(const QSqlRecord &rec)
+{
+    ElementHistory element;
+    element.setId(rec.value(0).toInt());
+    element.setLangF(rec.value(1).toString());
+    element.setLangT(rec.value(2).toString());
+    element.setTextF(rec.value(3).toString());
+    element.setTextT(rec.value(4).toString());
     return element;
 }
 

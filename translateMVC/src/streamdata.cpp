@@ -48,7 +48,6 @@ void StreamData::lastWasTrasnalate()
     QString translate=QString(stack.last());
     mutex.unlock();
     emit responseReceived(translate);
-    emit readyToStore();
 }
 
 void StreamData::addElement(QString el)

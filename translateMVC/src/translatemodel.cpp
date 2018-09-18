@@ -3,6 +3,7 @@
 TranslateModel::TranslateModel(QObject *parent) : QObject(parent)
 {
     stream=&StreamData::Instance();
+    services=&Services::Instance();
     connect(stream,SIGNAL(responseReceived(QString)),this,SLOT(getResponse(QString)));
     sourceText="Hello,World!";
     langFrom="en";
@@ -77,7 +78,7 @@ QString TranslateModel::getPage()
 
 void TranslateModel::translate()
 {
-    services.transalate(langFrom,langTo,sourceText);
+    services->transalate(langFrom,langTo,sourceText);
 }
 
 void TranslateModel::historyPage()

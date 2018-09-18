@@ -2,7 +2,8 @@
 
 HistoryModel::HistoryModel(QObject *parent)
 {
-    backing = services.readAll();
+    services=&Services::Instance();
+    backing = services->readAll();
 }
 
 int HistoryModel::rowCount(const QModelIndex &parent) const
@@ -50,7 +51,7 @@ void HistoryModel::deleteRow(const int i)
     beginRemoveRows(QModelIndex(), i, i);
     backing.deleteAt(i);
     endRemoveRows();
-    services.deleteRow(id);
+    services->deleteRow(id);
 }
 
 void HistoryModel::clearAll()
@@ -60,5 +61,5 @@ void HistoryModel::clearAll()
              backing.deleteAt(i);
          }
     endRemoveRows();
-    services.deleteAll();
+    services->deleteAll();
 }

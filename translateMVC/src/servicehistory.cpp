@@ -1,13 +1,8 @@
 #include "servicehistory.h"
-ServiceHistory* ServiceHistory::service=0;
-ServiceHistoryDestroyer ServiceHistory::destroyer;
-
 
 ServiceHistory::ServiceHistory(QObject *parent) : QObject(parent)
 {
     db.init();
-    stream=&StreamData::Instance();
-    connect(stream,SIGNAL(readyToStore()),this,SLOT(storeDataFromStream()));
 }
 
 bool ServiceHistory::deleteAll()
@@ -20,41 +15,12 @@ bool ServiceHistory::deleteRow(int id)
     return db.deleteRow(id);
 }
 
-bool ServiceHistory::insertRow(QString langFrom,QString langTo,QString textFrom,QString textTo)
+bool ServiceHistory::insertRow(ElementHistory element)
 {
-    return db.insertRow(parser.fromStrings(langFrom,langTo,textFrom,textTo));
+    return db.insertRow(element);
 }
 
-ListElementhistory ServiceHistory::readAll()
+ListRecords ServiceHistory::readAll()
 {
-    ListRecords recs = db.readAll();
-    ListElementhistory list;
-    for(int i=0;i<recs.size();i++){
-        list.add(parser.fromRecord(recs.getAt(i)));
-    }
-    return list;
-}
-
-ServiceHistory &ServiceHistory::Instance()
-{
-    if(!service){
-        service=new ServiceHistory();
-        destroyer.init(service);
-    }
-    return *service;
-}
-
-void ServiceHistory::storeDataFromStream()
-{
-    db.insertRow(parser.fromStringList(stream->readAll()));
-}
-
-ServiceHistoryDestroyer::~ServiceHistoryDestroyer()
-{
-    delete instance;
-}
-
-void ServiceHistoryDestroyer::init(ServiceHistory *service)
-{
-    instance=service;
+    return db.readAll();;
 }

@@ -10,15 +10,20 @@ CONFIG+=sailfishapp c++11 qt
 
 SOURCES +=  \
     main.cpp \
-    testservicehistory.cpp \
-    fakeservicehistory.cpp
+    fakeservicehistory.cpp \
+    fakeservicehttp.cpp \
+    testservices.cpp \
+    servicesT.cpp
 INCLUDEPATH +=../translateMVC/
 include(../translateMVC/translateMVC.pri)
 
 HEADERS += \
-    testservicehistory.h \
-    fakeservicehistory.h
-QT += testlib sql
+    fakeservicehistory.h \
+    fakeservicehttp.h \
+    testservices.h \
+    testservices.h \
+    servicesT.h
+QT += testlib sql network
 TARGETPATH = /usr/bin
 target.path = $$TARGETPATH
 

@@ -61,7 +61,7 @@ private:
 
     QString page;
     StreamData* stream;
-    Services services;
+    Services* services;
 
     QStringList combolist1;
     QStringList combolist2;
