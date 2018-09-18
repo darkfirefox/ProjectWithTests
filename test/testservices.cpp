@@ -8,9 +8,11 @@ void TestServices::init()
 
 void TestServices::translate()
 {
+    QSignalSpy spy(services,SIGNAL(addedAnswer()));
     services->transalate("en","ru","hi");
     QStringList streamList=stream->readAll();
-    QCOMPARE(streamList.size(),3);
+    QCOMPARE(streamList.size(),4);
+    QCOMPARE(spy.count(),1);
 }
 
 void TestServices::deleteRow()

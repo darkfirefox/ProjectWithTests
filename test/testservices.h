@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTest>
 #include "servicesT.h"
+#include <QSignalSpy>
 
 class TestServices : public QObject
 {

@@ -8,7 +8,7 @@ ServicesT::ServicesT(QObject *parent) : QObject(parent)
     serviceHttp=new FakeServiceHTTP();
     streamData=&StreamData::Instance();
     connect(this,SIGNAL(addedAnswer()),streamData,SLOT(lastWasTrasnalate()));
-    connect(dynamic_cast<QObject*>(serviceHttp),SIGNAL(receiveAnswer(QNetworkReply*)),this,SLOT(receivedTranslatedText(QNetworkReply*)));
+    connect(dynamic_cast<QObject*>(serviceHttp),SIGNAL(receiveAnswer(QObject*)),this,SLOT(receivedTranslatedText(QObject*)));
 }
 
 ServicesT &ServicesT::Instance()
@@ -42,15 +42,11 @@ ListElementhistory ServicesT::readAll()
     return leh;
 }
 
-void ServicesT::receivedTranslatedText(QNetworkReply *reply)
+void ServicesT::receivedTranslatedText(QObject *reply)
 {
-    QString response=converter.translatedFromReply(reply);
-    if(response.isEmpty()) streamData->clear();
-    else{
-        *streamData<<response;
+    QString res="response";
+        *streamData<<res;
         emit addedAnswer();
-        serviceHistory->insertRow(parser.fromStringList(streamData->readAll()));
-    }
 }
 
 ServicesTDestroyer::~ServicesTDestroyer()

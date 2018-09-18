@@ -33,7 +33,7 @@ signals:
     void addedAnswer();
 public slots:
 private slots:
-    void receivedTranslatedText(QNetworkReply* reply);
+    void receivedTranslatedText(QObject* reply);
 private:
     IServiceHttp* serviceHttp;
     IServiceHistory* serviceHistory;
